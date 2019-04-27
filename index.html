@@ -84,6 +84,117 @@
     <button type="button" class="language-selector selected-en_US" id="LangSelBtn">United States / English</button>
   </header>
 
+
+  <script>
+
+
+  /* define: window, document */
+  'use strict';
+
+  // using namespaces:
+  var app = app || {};
+  app.Data = app.Data || {};
+  app.vars = app.vars || {};
+
+  app.Views = app.Views || {};
+
+  // Current namespace:
+  app.Views.RevealHelmet = function() {
+    var touchDevice;
+    (function is_touch_device() {
+      try {
+        document.createEvent('TouchEvent');
+        touchDevice = true;
+        return true;
+      } catch (e) {
+        touchDevice = false;
+        console.log('Not a touch device.');
+        return false;
+      }
+    })();
+
+    var helmetSlider = document.getElementById(app.vars.sectionIDs.revealSection.helmetSlider);
+    var revealSlider = document.getElementById(app.vars.sectionIDs.revealSection.revealSlide);
+
+    revealSlider.addEventListener('touchstart', function(event) {
+      var shiftX = event.clientX - revealSlider.getBoundingClientRect().right;
+
+      slide(event.pageX);
+
+      // centers the revealSlider at (pageX) coordinates
+      function slide(pageX) {
+        var eC = helmetSlider.getBoundingClientRect();
+        var mP = pageX;
+        var offsetRight = eC.right;
+        var el = helmetSlider.offsetWidth;
+
+        var slideWidth = (offsetRight - mP) / el * 100;
+
+        if (0 < slideWidth && slideWidth < 100) {
+          revealSlider.style.width = slideWidth + '%';
+        }
+      }
+
+      function onMouseMove(event) {
+        if (event.targetTouches.length == 1) {
+          var touch = event.targetTouches[0];
+
+          slide(touch.pageX);
+        }
+      }
+
+      // (3) move the revealSlider on mousemove
+      helmetSlider.addEventListener('touchmove', onMouseMove);
+
+      // (4) drop the revealSlider, remove unneeded handlers
+      revealSlider.addEventListener('touchend', function() {
+        helmetSlider.removeEventListener('touchmove', onMouseMove);
+        revealSlider.onmouseup = null;
+      });
+    });
+
+    revealSlider.addEventListener('mousedown', function(event) {
+      var shiftX = event.clientX - revealSlider.getBoundingClientRect().right;
+
+      slide(event.pageX);
+
+      // centers the revealSlider at (pageX) coordinates
+      function slide(pageX) {
+        var eC = helmetSlider.getBoundingClientRect();
+        var mP = pageX;
+        var offsetRight = eC.right;
+        var el = helmetSlider.offsetWidth;
+
+        var slideWidth = (offsetRight - mP) / el * 100;
+
+        if (0 < slideWidth && slideWidth < 100) {
+          revealSlider.style.width = slideWidth + '%';
+        }
+      }
+
+      function onMouseMove(event) {
+        slide(event.pageX);
+      }
+
+      // (3) move the revealSlider on mousemove
+      helmetSlider.addEventListener('mousemove', onMouseMove);
+
+      // (4) drop the revealSlider, remove unneeded handlers
+      revealSlider.addEventListener('mouseup', function() {
+        helmetSlider.removeEventListener('mousemove', onMouseMove);
+        revealSlider.onmouseup = null;
+      });
+    });
+
+    revealSlider.addEventListener('dragstart', function() {
+      return false;
+    });
+  };
+
+  /* define: window, document */
+  'use strict';
+</script>
+
   <div class="page" id="MainPage">
     <!-- Start TREK Hero Banner -->
     <section class="container hero" id="HeroContainer" data-video="">
