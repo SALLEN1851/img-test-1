@@ -2,15 +2,8 @@
 <html lang="en-US" dir="ltr">
 
 <head>
-  <script src="img-compare1/img-test-1/js/init.min.js" type="text/javascript"></script>
+  <script src="/js/init.min.js" type="text/javascript"></script>
 
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-5PPTR3');</script>
-  <!-- End Google Tag Manager -->
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,10 +50,7 @@
 </head>
 
 <body id="PageBody">
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PPTR3"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+
 
   <header class="masthead">
     <object class="logo">
@@ -85,115 +75,6 @@
   </header>
 
 
-  <script>
-
-
-  /* define: window, document */
-  'use strict';
-
-  // using namespaces:
-  var app = app || {};
-  app.Data = app.Data || {};
-  app.vars = app.vars || {};
-
-  app.Views = app.Views || {};
-
-  // Current namespace:
-  app.Views.RevealHelmet = function() {
-    var touchDevice;
-    (function is_touch_device() {
-      try {
-        document.createEvent('TouchEvent');
-        touchDevice = true;
-        return true;
-      } catch (e) {
-        touchDevice = false;
-        console.log('Not a touch device.');
-        return false;
-      }
-    })();
-
-    var helmetSlider = document.getElementById(app.vars.sectionIDs.revealSection.helmetSlider);
-    var revealSlider = document.getElementById(app.vars.sectionIDs.revealSection.revealSlide);
-
-    revealSlider.addEventListener('touchstart', function(event) {
-      var shiftX = event.clientX - revealSlider.getBoundingClientRect().right;
-
-      slide(event.pageX);
-
-      // centers the revealSlider at (pageX) coordinates
-      function slide(pageX) {
-        var eC = helmetSlider.getBoundingClientRect();
-        var mP = pageX;
-        var offsetRight = eC.right;
-        var el = helmetSlider.offsetWidth;
-
-        var slideWidth = (offsetRight - mP) / el * 100;
-
-        if (0 < slideWidth && slideWidth < 100) {
-          revealSlider.style.width = slideWidth + '%';
-        }
-      }
-
-      function onMouseMove(event) {
-        if (event.targetTouches.length == 1) {
-          var touch = event.targetTouches[0];
-
-          slide(touch.pageX);
-        }
-      }
-
-      // (3) move the revealSlider on mousemove
-      helmetSlider.addEventListener('touchmove', onMouseMove);
-
-      // (4) drop the revealSlider, remove unneeded handlers
-      revealSlider.addEventListener('touchend', function() {
-        helmetSlider.removeEventListener('touchmove', onMouseMove);
-        revealSlider.onmouseup = null;
-      });
-    });
-
-    revealSlider.addEventListener('mousedown', function(event) {
-      var shiftX = event.clientX - revealSlider.getBoundingClientRect().right;
-
-      slide(event.pageX);
-
-      // centers the revealSlider at (pageX) coordinates
-      function slide(pageX) {
-        var eC = helmetSlider.getBoundingClientRect();
-        var mP = pageX;
-        var offsetRight = eC.right;
-        var el = helmetSlider.offsetWidth;
-
-        var slideWidth = (offsetRight - mP) / el * 100;
-
-        if (0 < slideWidth && slideWidth < 100) {
-          revealSlider.style.width = slideWidth + '%';
-        }
-      }
-
-      function onMouseMove(event) {
-        slide(event.pageX);
-      }
-
-      // (3) move the revealSlider on mousemove
-      helmetSlider.addEventListener('mousemove', onMouseMove);
-
-      // (4) drop the revealSlider, remove unneeded handlers
-      revealSlider.addEventListener('mouseup', function() {
-        helmetSlider.removeEventListener('mousemove', onMouseMove);
-        revealSlider.onmouseup = null;
-      });
-    });
-
-    revealSlider.addEventListener('dragstart', function() {
-      return false;
-    });
-  };
-
-  /* define: window, document */
-  'use strict';
-</script>
 
   <div class="page" id="MainPage">
     <!-- Start TREK Hero Banner -->
